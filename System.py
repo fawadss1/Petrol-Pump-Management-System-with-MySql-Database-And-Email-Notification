@@ -167,7 +167,7 @@ class System:
         msg["Bcc"] = email_address
         msg.attach(MIMEText(self.message, 'html'))
         server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
-        server.login('fatmsystem@gmail.com', 'SWATstar546')
-        server.sendmail("fatmsystem@gmail.com", email_address, msg.as_string())
+        server.login('email@gmail.com', 'pass')
+        server.sendmail("email@gmail.com", email_address, msg.as_string())
         server.quit()
         Narrator(f"\nPlease Check Your Email Inbox {email_address} For Today Summary")
