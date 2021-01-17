@@ -29,8 +29,3 @@ try:
 
 except:
     Narrator("\n\n\n Sorry! Your DataBase Server is Down! Please Run Your Database Server")
-
-# External Packages Used in this Project
-# mysql-connector-python
-# pyttsx3
-# pdfkit
