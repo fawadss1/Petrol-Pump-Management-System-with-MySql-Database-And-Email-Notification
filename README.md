@@ -2,7 +2,7 @@ Petrol-Management-System-with-MySql-Database-And-Email-Notification
 
 Automatically Create Database And Table In MySQL Database
 
-Packages Used in This Project (mysql-connector-python,pyttsx3,pdfkit,smtplib For Email)You Should have to Be Install These Packages if you Want to Run It.
+Packages Used in This Project (mysql-connector-python, pyttsx3, pdfkit, smtplib For Email)You Should have to Be Install These Packages if you Want to Run It.
 
 if You want to run it You must have to Run Main.py File First.
 
