@@ -62,6 +62,7 @@ class System:
         self.message = f"""<!DOCTYPE html>
             <html>
             <body>
+            <img style="position: absolute;width: 99%;height: 95%;opacity: 0.2;" src="https://bit.ly/3r0WbeH">
             <h1 style="text-align: center;color: red">Fawad Petrol Management System</h>
             <h4 style="text-align: center;"> {pump_name} Today Summary</h4>
             <h4 style="float: left;"><b>Date: {x}</b></h4>
