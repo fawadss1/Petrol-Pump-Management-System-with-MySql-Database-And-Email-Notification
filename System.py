@@ -57,6 +57,7 @@ class System:
             self.send_email()
         except:
             Narrator("Sorry Email Cannot be Send Due To Internet Connection Error")
+            self.pdfmaker()
 
     def pdfmaker(self):
         self.message = f"""<!DOCTYPE html>
@@ -64,7 +65,7 @@ class System:
             <body>
             <img style="position: absolute;width: 99%;height: 95%;opacity: 0.2;" src="https://bit.ly/3r0WbeH">
             <h1 style="text-align: center;color: red">Fawad Petrol Management System</h>
-            <h4 style="text-align: center;"> {pump_name} Today Summary</h4>
+            <h4 style="text-align: center;"> {pump_name}<br>Today Summary</h4>
             <h4 style="float: left;"><b>Date: {x}</b></h4>
             <h4 style="float: right;"><b>Time: {x_t}</b></h4>
             <table style="width: 100%;">
@@ -148,16 +149,19 @@ class System:
             <p style="position:fixed;bottom:0;width: 100%;background-color:black;color:yellow;text-align:center;">Copyright@ 2021 Fawad. All Rights Reserved</P>
             </body>
             </html>"""
-        config = pdfkit.configuration(wkhtmltopdf='C:\Program Files\wkhtmltopdf/bin/wkhtmltopdf.exe')
         x_r = y.strftime("%d_%m_%y")
         if os.path.exists("Daily_Reports"):
             pass
         else:
             os.mkdir("Daily_Reports")
+        try:
             cr = f"Daily_Reports\/{x_r}.pdf"
-            pdfkit.from_string(self.message, cr, configuration=config)
+            pdfkit.from_string(self.message, cr, configuration=pdfkit.configuration(wkhtmltopdf='C:\Program Fils\wkhtmltopdf/bin/wkhtmltopdf.exe'))
             os.startfile(cr)
             Narrator("Your Today Report Has Been Saved In Project Daily_Report Directory")
+        except OSError:
+            Narrator("Error 'Wkhtmltopdf' Doesn't Install in Your Computer\nPlease Download The Software And Install It In (C:\Program Files\)\nClick To Download (https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf)")
+            print("*" + "~~~" * 30 + "*")
 
     def send_email(self):
         self.pdfmaker()
