@@ -30,18 +30,17 @@ try:
     Narrator("I am Showing You Recode Of Date : " + x_p + " Please Fill Up The Following Fields CareFully Thank You ")
     print("*" + "--" * 35 + "*")
 
-    if prc_updt == "01" or prc_updt == "16":
+    if prc_updt == "16" or prc_updt == "16":
         while True:
             Narrator("Your Petrol Price is : " + str(ptrl_price) + " And Diesel Price Is : " + str(dsil_price))
             Narrator("Is It Change Press (Y Or N) :")
             price_update = input().upper()
-            print("*" + "~~" * 35 + "*")
             if price_update == "Y":
                 Narrator("Enter Your New Petrol Price : ")
                 ptrl_price_updt = float(input())
-                print("*" + "~~" * 35 + "*")
                 Narrator("Enter Your New Diesel Price : ")
                 dsil_price_updt = float(input())
+                Narrator(f"Your New Petrol Price is {ptrl_price_updt} Rs/Ltr And Diesel Price is {dsil_price_updt} Rs/Ltr")
                 print("*" + "~~" * 35 + "*")
                 break
             elif price_update == "N":
