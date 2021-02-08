@@ -58,22 +58,12 @@ current_mnth_balance = input()
 print("*" + "~~" * 35 + "*")
 Narrator("Your Account Has Been Created Successfully")
 print("*" + "~~" * 35 + "*")
-password = hashlib.md5(password.encode('utf-8')).hexdigest()
+password = "%546" + hashlib.md5(password.encode('utf-8')).hexdigest() + "546%"
 f = db.cursor()
-f.execute("SHOW TABLES")
-tbl = f.fetchall()
-if ("users",) in tbl:
-    pass
-else:
-    f.execute("CREATE TABLE `users` (name VARCHAR(15),email_addres VARCHAR(255),pump_name VARCHAR(255),reg_no VARCHAR(255),username VARCHAR(255),password VARCHAR(255))")
+f.execute("CREATE TABLE IF NOT EXISTS `users` (id INT AUTO_INCREMENT PRIMARY KEY ,name VARCHAR(15),email_addres VARCHAR(255),pump_name VARCHAR(255),reg_no VARCHAR(255),username VARCHAR(255),password VARCHAR(255))")
 f.execute("INSERT INTO `users` (name,email_addres,pump_name,reg_no,username,password) VALUES ('" + name + "','" + email + "','" + pump_name + "','" + reg_no + "','" + username + "','" + password + "')")
 db.commit()
 
-f.execute("SHOW TABLES")
-tbl = f.fetchall()
-if ("day_summary",) in tbl:
-    pass
-else:
-    f.execute("CREATE TABLE `day_summary` (date VARCHAR(15),ptrl_price VARCHAR(255),desl_price VARCHAR(255),ppra VARCHAR(255),pprb VARCHAR(255),ptrl_sld VARCHAR(255),ptrl_rs VARCHAR(255),ptrl_stck VARCHAR(255),dpra VARCHAR(255),dprb VARCHAR(255),desl_sld VARCHAR(255),desl_rs VARCHAR(255),dsil_stck VARCHAR(255),expanses VARCHAR(255),cashback VARCHAR(255),name VARCHAR(255),ttl_dy_rs VARCHAR(255), ttl_mnth_rs VARCHAR(255))")
+f.execute("CREATE TABLE IF NOT EXISTS `day_summary` (id INT AUTO_INCREMENT PRIMARY KEY, date VARCHAR(15),ptrl_price VARCHAR(255),desl_price VARCHAR(255),ppra VARCHAR(255),pprb VARCHAR(255),ptrl_sld VARCHAR(255),ptrl_rs VARCHAR(255),ptrl_stck VARCHAR(255),dpra VARCHAR(255),dprb VARCHAR(255),desl_sld VARCHAR(255),desl_rs VARCHAR(255),dsil_stck VARCHAR(255),expanses VARCHAR(255),cashback VARCHAR(255),name VARCHAR(255),ttl_dy_rs VARCHAR(255), ttl_mnth_rs VARCHAR(255))")
 f.execute("INSERT INTO `day_summary` (date,ptrl_price,desl_price,ppra,pprb,ptrl_stck,dpra,dprb,dsil_stck,ttl_mnth_rs) VALUES ('" + x_p + "','" + petrol_price + "','" + diesel_price + "','" + petrol_A + "','" + petrol_B + "','" + petrol_stock + "','" + diesel_A + "','" + diesel_B + "','" + diesel_stock + "','" + current_mnth_balance + "')")
 db.commit()
