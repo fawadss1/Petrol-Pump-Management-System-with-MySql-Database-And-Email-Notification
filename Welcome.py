@@ -54,25 +54,28 @@ try:
     else:
         ptrl_price_updt = ptrl_price
         dsil_price_updt = dsil_price
-    Narrator("Do You Have New Fuel Stock (Y or N) :")
-    cnfrm_stock = input().upper()
-    if cnfrm_stock == "Y":
-        print("*" + "~~" * 35 + "*")
-        Narrator("Enter Your New Petrol Stock Your Previous Stock Is " + str(ptrl_stck) + " Litters")
-        ptrl_stck_updt = float(input())
-        ptrl_stck_updt += ptrl_stck
-
-        Narrator("Enter Your New Diesel Stock Your Previous Stock Is " + str(dsil_stck) + " Litters")
-        dsil_stck_updt = float(input())
-        dsil_stck_updt += dsil_stck
-        print("*" + "~~" * 35 + "*")
-    elif cnfrm_stock == "N":
-        ptrl_stck_updt = ptrl_stck
-        dsil_stck_updt = dsil_stck
-        print("*" + "~~" * 35 + "*")
-    else:
-        Narrator("Invalid Key Try Again")
-        print("*" + "~~" * 35 + "*")
+    while True:
+        Narrator("Do You Have New Fuel Stock (Y or N) :")
+        cnfrm_stock = input().upper()
+        if cnfrm_stock == "Y":
+            print("*" + "~~" * 35 + "*")
+            Narrator("Enter Your New Petrol Stock Your Previous Stock Is " + str(ptrl_stck) + " Litters")
+            ptrl_stck_updt = float(input())
+            ptrl_stck_updt += ptrl_stck
+            Narrator("Enter Your New Diesel Stock Your Previous Stock Is " + str(dsil_stck) + " Litters")
+            dsil_stck_updt = float(input())
+            dsil_stck_updt += dsil_stck
+            Narrator(f"Your New Petrol Stock is {ptrl_stck_updt} Litters And Diesel Stock is {dsil_stck_updt} Litters")
+            print("*" + "~~" * 35 + "*")
+            break
+        elif cnfrm_stock == "N":
+            ptrl_stck_updt = ptrl_stck
+            dsil_stck_updt = dsil_stck
+            print("*" + "~~" * 35 + "*")
+            break
+        else:
+            Narrator("Invalid Key Try Again")
+            print("*" + "~~" * 35 + "*")
     Narrator("Enter Your New Reading of Petrol Machine 'A' Your Previous Reading is: " + str(pris_ptrl_rdng_A))
     crnt_ptrl_rdng_A = float(input())
     print("*" + "~~" * 35 + "*")
