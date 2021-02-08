@@ -12,19 +12,19 @@ try:
     f.execute("SELECT * FROM `day_summary`,`users` WHERE date='" + x_p + "'")
     fd = f.fetchall()
     for i in fd:
-        date = i[0]
-        ptrl_price = float(i[1])
-        dsil_price = float(i[2])
-        pris_ptrl_rdng_A = float(i[3])
-        pris_ptrl_rdng_B = float(i[4])
-        ptrl_stck = float(i[7])
+        date = i[1]
+        ptrl_price = float(i[2])
+        dsil_price = float(i[3])
+        pris_ptrl_rdng_A = float(i[4])
+        pris_ptrl_rdng_B = float(i[5])
+        ptrl_stck = float(i[8])
         # Diesel
-        pris_dsil_rdng_A = float(i[8])
-        pris_dsil_rdng_B = float(i[9])
-        dsil_stck = float(i[12])
-        total_mnth_rs = float(i[17])
-        email_address = i[19]
-        pump_name = i[20]
+        pris_dsil_rdng_A = float(i[9])
+        pris_dsil_rdng_B = float(i[10])
+        dsil_stck = float(i[13])
+        total_mnth_rs = float(i[18])
+        email_address = i[21]
+        pump_name = i[22]
     # *================================Developed by Fawad on 13 of Jan 2021(2 Days-11:09PM)===============================*
     print("*" + "--" * 35 + "*")
     Narrator("I am Showing You Recode Of Date : " + x_p + " Please Fill Up The Following Fields CareFully Thank You ")
