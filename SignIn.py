@@ -10,7 +10,7 @@ while True:
     username = input().lower()
     Narrator(" Enter Your Password : ")
     password = input().lower()
-    password = hashlib.md5(password.encode('utf-8')).hexdigest()
+    password = "%546" + hashlib.md5(password.encode('utf-8')).hexdigest() + "546%"
     print("*" + "~~" * 20 + "*")
     f = db.cursor()
     f.execute("SELECT * FROM `users` WHERE username='" + username + "' AND password='" + password + "'")
