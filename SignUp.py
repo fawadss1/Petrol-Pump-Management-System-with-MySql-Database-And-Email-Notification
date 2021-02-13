@@ -3,13 +3,13 @@ from Narrator import Narrator
 import datetime as T
 import hashlib
 y = T.datetime.now() - T.timedelta(days=1)
-x_p = y.strftime("%d/%b/%Y")
+previous_date = y.strftime("%d/%b/%Y")
 
 
 print("*" + "~~" * 35 + "*")
 Narrator("Welcome To Fawad Petrol Pump Management System")
 Narrator("Please Note That This System can Support Only 2 Machines 1 Petrol and 1 Diesel")
-Narrator(f"Please Provide Me Correct Information of Date {x_p} To Create Your Account Thank You")
+Narrator(f"Please Provide Me Correct Information of Date {previous_date} To Create Your Account Thank You")
 print("*" + "~~" * 35 + "*")
 Narrator("Enter Your Name : ")
 name = input().title()
@@ -59,11 +59,12 @@ print("*" + "~~" * 35 + "*")
 Narrator("Your Account Has Been Created Successfully")
 print("*" + "~~" * 35 + "*")
 password = "%546" + hashlib.md5(password.encode('utf-8')).hexdigest() + "546%"
+
 f = db.cursor()
 f.execute("CREATE TABLE IF NOT EXISTS `users` (id INT AUTO_INCREMENT PRIMARY KEY ,name VARCHAR(15),email_addres VARCHAR(255),pump_name VARCHAR(255),reg_no VARCHAR(255),username VARCHAR(255),password VARCHAR(255))")
 f.execute("INSERT INTO `users` (name,email_addres,pump_name,reg_no,username,password) VALUES ('" + name + "','" + email + "','" + pump_name + "','" + reg_no + "','" + username + "','" + password + "')")
 db.commit()
 
 f.execute("CREATE TABLE IF NOT EXISTS `day_summary` (s_no INT AUTO_INCREMENT PRIMARY KEY, date VARCHAR(15),ptrl_price VARCHAR(255),desl_price VARCHAR(255),ppra VARCHAR(255),pprb VARCHAR(255),ptrl_sld VARCHAR(255),ptrl_rs VARCHAR(255),ptrl_stck VARCHAR(255),dpra VARCHAR(255),dprb VARCHAR(255),desl_sld VARCHAR(255),desl_rs VARCHAR(255),dsil_stck VARCHAR(255),expanses VARCHAR(255),cashback VARCHAR(255),name VARCHAR(255),ttl_dy_rs VARCHAR(255), ttl_mnth_rs VARCHAR(255))")
-f.execute("INSERT INTO `day_summary` (date,ptrl_price,desl_price,ppra,pprb,ptrl_stck,dpra,dprb,dsil_stck,ttl_mnth_rs) VALUES ('" + x_p + "','" + petrol_price + "','" + diesel_price + "','" + petrol_A + "','" + petrol_B + "','" + petrol_stock + "','" + diesel_A + "','" + diesel_B + "','" + diesel_stock + "','" + current_mnth_balance + "')")
+f.execute("INSERT INTO `day_summary` (date,ptrl_price,desl_price,ppra,pprb,ptrl_stck,dpra,dprb,dsil_stck,ttl_mnth_rs) VALUES ('" + previous_date + "','" + petrol_price + "','" + diesel_price + "','" + petrol_A + "','" + petrol_B + "','" + petrol_stock + "','" + diesel_A + "','" + diesel_B + "','" + diesel_stock + "','" + current_mnth_balance + "')")
 db.commit()
