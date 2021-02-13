@@ -68,3 +68,4 @@ db.commit()
 f.execute("CREATE TABLE IF NOT EXISTS `day_summary` (s_no INT AUTO_INCREMENT PRIMARY KEY, date VARCHAR(15),ptrl_price VARCHAR(255),desl_price VARCHAR(255),ppra VARCHAR(255),pprb VARCHAR(255),ptrl_sld VARCHAR(255),ptrl_rs VARCHAR(255),ptrl_stck VARCHAR(255),dpra VARCHAR(255),dprb VARCHAR(255),desl_sld VARCHAR(255),desl_rs VARCHAR(255),dsil_stck VARCHAR(255),expanses VARCHAR(255),cashback VARCHAR(255),name VARCHAR(255),ttl_dy_rs VARCHAR(255), ttl_mnth_rs VARCHAR(255))")
 f.execute("INSERT INTO `day_summary` (date,ptrl_price,desl_price,ppra,pprb,ptrl_stck,dpra,dprb,dsil_stck,ttl_mnth_rs) VALUES ('" + previous_date + "','" + petrol_price + "','" + diesel_price + "','" + petrol_A + "','" + petrol_B + "','" + petrol_stock + "','" + diesel_A + "','" + diesel_B + "','" + diesel_stock + "','" + current_mnth_balance + "')")
 db.commit()
+import SignIn
