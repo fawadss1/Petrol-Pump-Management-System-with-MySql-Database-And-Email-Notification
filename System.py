@@ -9,8 +9,8 @@ import smtplib
 import os
 
 y = T.datetime.now()
-x = y.strftime("%d/%b/%Y")
-x_t = y.strftime("%I:%M:%S %p")
+today_date = y.strftime("%d/%b/%Y")
+current_time = y.strftime("%I:%M:%S %p")
 
 # Litters Sold Today
 petrol_sold_A = crnt_ptrl_rdng_A - pris_ptrl_rdng_A
@@ -47,17 +47,16 @@ class System:
             petrol_rupees) + "',ptrl_stck='" + str(petrol_stock) + "',dpra='" + str(
             crnt_dsil_rdng_A) + "',dprb='" + str(crnt_dsil_rdng_B) + "',desl_sld='" + str(
             total_diesel_sold) + "',desl_rs='" + str(diesel_rupees) + "',dsil_stck='" + str(
-            diesel_stock) + "' WHERE date='" + x + "'")
+            diesel_stock) + "' WHERE date='" + today_date + "'")
         # Update Database for money
         f.execute("UPDATE `day_summary` SET expanses='" + str(total_expanses) + "',cashback='" + str(
             cashback) + "',name='" + str(cashback_name) + "',ttl_dy_rs='" + str(total_rs) + "',ttl_mnth_rs='" + str(
-            total_mnth_rs) + "' WHERE date='" + x + "'")
+            total_mnth_rs) + "' WHERE date='" + today_date + "'")
         db.commit()
         try:
             self.send_email()
         except:
             Narrator("Sorry Email Cannot be Send Due To Internet Connection Error")
-            self.pdfmaker()
 
     def pdfmaker(self):
         self.message = f"""<!DOCTYPE html>
@@ -66,8 +65,8 @@ class System:
             <img style="position: absolute;width: 99%;height: 95%;opacity: 0.2;" src="https://bit.ly/3r0WbeH">
             <h1 style="text-align: center;color: red">Fawad Petrol Management System</h>
             <h4 style="text-align: center;"> {pump_name}<br>Today Summary</h4>
-            <h4 style="float: left;"><b>Date: {x}</b></h4>
-            <h4 style="float: right;"><b>Time: {x_t}</b></h4>
+            <h4 style="float: left;"><b>Date: {today_date}</b></h4>
+            <h4 style="float: right;"><b>Time: {current_time}</b></h4>
             <table style="width: 100%;">
               <tr style="background-color: green;color:white">
                 <th style="border: 2px solid #dddddd;border-color: #a117eb;text-align: center;padding: 8px;"><b>*</b></th>
@@ -156,11 +155,12 @@ class System:
             os.mkdir("Daily_Reports")
         try:
             cr = f"Daily_Reports\/{x_r}.pdf"
-            pdfkit.from_string(self.message, cr, configuration=pdfkit.configuration(wkhtmltopdf='C:\Program Fils\wkhtmltopdf/bin/wkhtmltopdf.exe'))
+            pdfkit.from_string(self.message, cr, configuration=pdfkit.configuration(wkhtmltopdf='C:\Program Files\wkhtmltopdf/bin/wkhtmltopdf.exe'))
             os.startfile(cr)
             Narrator("Your Today Report Has Been Saved In Project Daily_Report Directory")
         except OSError:
-            Narrator("Error 'Wkhtmltopdf' Doesn't Install in Your Computer\nPlease Download The Software And Install It In (C:\Program Files\)\nClick To Download (https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf)")
+            Narrator("Error 'Wkhtmltopdf' Doesn't Install in Your Computer\nPlease Download The Software And Install It In (C:\Program Files)")
+            print("Click To Download (https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf)")
             print("*" + "~~~" * 30 + "*")
 
     def send_email(self):
@@ -172,7 +172,7 @@ class System:
         msg["Bcc"] = email_address
         msg.attach(MIMEText(self.message, 'html'))
         server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
-        server.login('email@gmail.com', 'pass')
-        server.sendmail("email@gmail.com", email_address, msg.as_string())
+        server.login('email', 'pass')
+        server.sendmail("email", email_address, msg.as_string())
         server.quit()
         Narrator(f"\nPlease Check Your Email Inbox {email_address} For Today Summary")
