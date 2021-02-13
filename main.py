@@ -6,10 +6,7 @@ try:
     tbl = f.fetchall()
     if ("users",) in tbl:
         import SignIn
-        import Welcome
     else:
         import SignUp
-        import SignIn
-        import Welcome
 except:
     pass
