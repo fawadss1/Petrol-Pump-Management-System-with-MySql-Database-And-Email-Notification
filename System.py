@@ -55,8 +55,10 @@ class System:
         db.commit()
         try:
             self.send_email()
+        except smtplib.SMTPRecipientsRefused:
+            Narrator("Sorry Email Cannot be Send Because Your Provided Email Address is Invalid")
         except:
-            Narrator("Sorry Email Cannot be Send Due To Internet Connection Error")
+            Narrator("Sorry Email Cannot be Send Due Internet Connection Error")
 
     def pdfmaker(self):
         self.message = f"""<!DOCTYPE html>
