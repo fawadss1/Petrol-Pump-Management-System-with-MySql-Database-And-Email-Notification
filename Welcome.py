@@ -111,6 +111,7 @@ try:
         cashout_name = input().title()
         print("*" + "~~" * 35 + "*")
     # *===========================================================================================================*
+    Narrator("Please Wait System is in Process................")
     f.execute("SELECT * FROM `day_summary` WHERE date='" + today_date + "'")
     f.fetchall()
     if f.rowcount > 0:
