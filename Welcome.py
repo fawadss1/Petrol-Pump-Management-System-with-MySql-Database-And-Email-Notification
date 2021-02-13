@@ -3,13 +3,14 @@ from Narrator import Narrator
 import datetime as T
 
 y = T.datetime.now() - T.timedelta(days=1)
-x_p = y.strftime("%d/%b/%Y")
+previous_date = y.strftime("%d/%b/%Y")
 y = T.datetime.now()
-x = y.strftime("%d/%b/%Y")
+today_date = y.strftime("%d/%b/%Y")
+current_time = y.strftime("%I:%M:%S %p")
 prc_updt = y.strftime("%d")
 try:
     f = db.cursor()
-    f.execute("SELECT * FROM `day_summary`,`users` WHERE date='" + x_p + "'")
+    f.execute("SELECT * FROM `day_summary`,`users` WHERE date='" + previous_date + "'")
     fd = f.fetchall()
     for i in fd:
         date = i[1]
@@ -23,11 +24,12 @@ try:
         pris_dsil_rdng_B = float(i[10])
         dsil_stck = float(i[13])
         total_mnth_rs = float(i[18])
+        name = str(i[20])
         email_address = i[21]
         pump_name = i[22]
     # *================================Developed by Fawad on 13 of Jan 2021(2 Days-11:09PM)===============================*
     print("*" + "--" * 35 + "*")
-    Narrator("I am Showing You Recode Of Date : " + x_p + " Please Fill Up The Following Fields CareFully Thank You ")
+    Narrator("I am Showing You Recode Of Date : " + previous_date + " Please Fill Up The Following Fields CareFully Thank You ")
     print("*" + "--" * 35 + "*")
 
     if prc_updt == "16" or prc_updt == "16":
@@ -109,19 +111,22 @@ try:
         cashout_name = input().title()
         print("*" + "~~" * 35 + "*")
     # *===========================================================================================================*
-    f.execute("SELECT * FROM `day_summary` WHERE date='" + x + "'")
+    f.execute("SELECT * FROM `day_summary` WHERE date='" + today_date + "'")
     f.fetchall()
     if f.rowcount > 0:
         pass
     else:
-        f.execute("INSERT INTO `day_summary` (date) VALUES ('" + x + "')")
+        f.execute("INSERT INTO `day_summary` (date) VALUES ('" + today_date + "')")
         db.commit()
     import System
     obj = System.System()
     obj.update_DB()
+    f.execute("CREATE TABLE IF NOT EXISTS `login_stats` (date VARCHAR(15),time VARCHAR(255),name VARCHAR(255))")
+    f.execute("INSERT INTO `login_stats` (date,time,name) VALUES ('" + today_date + "','" + current_time + "','" + name + "')")
+    db.commit()
 
 except NameError:
-    Narrator("Sorry You Don't Have Any Record At Date " + x_p + " Thank You")
+    Narrator("Sorry You Don't Have Any Record At Date " + previous_date + " Thank You")
     print("*" + "~~" * 35 + "*")
 except ValueError:
     Narrator("Sorry You Have Entered Invalid Value During Signup Or Missed Values \nPlease Change Your Database Name From DB_Connection To Create New Account Thank You")
