@@ -18,6 +18,8 @@ while True:
     if f.rowcount > 0:
         Narrator("Login Successful")
         print("*" + "~~" * 20 + "*")
+        # noinspection PyUnresolvedReferences
+        import Welcome
         break
     else:
         Narrator("Invalid UserName Or Password Try Again")
